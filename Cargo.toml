@@ -1,7 +1,9 @@
 [package]
-name = "safe-sync"
+name = "crip-crypt"
 version = "0.1.0"
 edition = "2024"
+authors = ["@elenndev"]
+description = "A folder encryption tool"
 
 [dependencies]
 anyhow = "1"

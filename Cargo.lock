@@ -327,6 +327,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "crip-crypt"
+version = "0.1.0"
+dependencies = [
+ "age",
+ "anyhow",
+ "chrono",
+ "clap",
+ "flate2",
+ "secrecy 0.8.0",
+ "tar",
+]
+
+[[package]]
 name = "crypto-common"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1077,19 +1090,6 @@ name = "rustversion"
 version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
-
-[[package]]
-name = "safe-sync"
-version = "0.1.0"
-dependencies = [
- "age",
- "anyhow",
- "chrono",
- "clap",
- "flate2",
- "secrecy 0.8.0",
- "tar",
-]
 
 [[package]]
 name = "salsa20"
