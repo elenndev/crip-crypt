@@ -1,28 +1,44 @@
 use age::{Encryptor, secrecy::SecretString};
 use anyhow::Result;
-use anyhow::bail;
 use chrono::Local;
+use clap::Error;
+use clap::error::ErrorKind;
 use flate2::{Compression, write::GzEncoder};
 use std::{fs::File, io::BufWriter, path::PathBuf};
 use tar::Builder;
 
 // use streaming encryption
-pub fn encrypt_folder(
-    folder_path: PathBuf,
-    password: String,
-    output: Option<PathBuf>,
-) -> Result<()> {
+pub fn encrypt_folder(folder_path: PathBuf, password: String, output: PathBuf) -> Result<()> {
     if !folder_path.exists() {
-        bail!("folder pathdoes not exist");
+        Error::raw(
+            ErrorKind::InvalidValue,
+            format!(
+                "input folder path does not exist: {}\n",
+                folder_path.display()
+            ),
+        )
+        .exit()
     }
 
-    let output_file = match output {
-        Some(path) => path,
-        None => {
-            let timestamp = Local::now().format("%Y-%m-%d_%H-%M-%S");
+    if !output.exists() {
+        Error::raw(
+            ErrorKind::InvalidValue,
+            format!("Output folder path does not exist: {}\n", output.display()),
+        )
+        .exit()
+    }
 
-            PathBuf::from(format!("folder-backup-{}.tar.gz.age", timestamp))
-        }
+    if output.is_file() {
+        Error::raw(
+            ErrorKind::InvalidValue,
+            format!("Output must be a directory: {}\n", output.display()),
+        )
+        .exit()
+    }
+
+    let output_file = {
+        let timestamp = Local::now().format("%Y-%m-%d_%H-%M-%S");
+        output.join(format!("folder-backup-{}.tar.gz.age", timestamp))
     };
 
     println!("Encrypting...");

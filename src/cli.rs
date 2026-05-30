@@ -11,22 +11,20 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     Encrypt {
+        // Positional arguments
         folder_path: PathBuf,
+        output: PathBuf,
 
         #[arg(short, long)]
         password: String,
-
-        #[arg(short, long)]
-        output: Option<PathBuf>,
     },
 
     Decrypt {
+        // Positional arguments
         encrypted_file: PathBuf,
+        output: PathBuf,
 
         #[arg(short, long)]
         password: String,
-
-        #[arg(short, long)]
-        output: PathBuf,
     },
 }
