@@ -1,4 +1,1 @@
-- [ ] Better error handlers
-    - [X] Encrypt: When output argument path is a file
-    - [X] Encrypt: When output argument path does not exist
-    - [X] Decrypt: When input encrypted file doesn't exist
+I use this to compress/decompress and encrypt/decrypt folders
