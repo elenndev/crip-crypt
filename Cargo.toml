@@ -3,10 +3,14 @@ name = "crip-crypt"
 version = "0.1.0"
 edition = "2024"
 authors = ["@elenndev"]
-description = "A folder encryption tool"
+description = "A CLI tool for compressing, encrypting, decrypting, and extracting folders"
+license = "MIT"
+repository = "https://github.com/elenndev/crip-crypt.git"
+readme = "README.md"
+keywords = ["encryption", "compression", "cli", "security", "backup"]
+categories = ["command-line-utilities", "cryptography"]
 
 [dependencies]
-anyhow = "1"
 age = { version = "0.11", features = ["armor"] }
 secrecy = "0.8"
 

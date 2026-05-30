@@ -1,12 +1,12 @@
 mod cli;
 mod decrypt;
 mod encrypt;
+mod result;
 
 use crate::cli::{Cli, Commands};
-use anyhow::Result;
 use clap::Parser;
 
-fn main() -> Result<()> {
+fn main() -> result::Result<()> {
     let cli = Cli::parse();
 
     match cli.command {

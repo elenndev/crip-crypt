@@ -1,7 +1,6 @@
 use age::Decryptor;
 use age::scrypt;
 use age::secrecy::SecretString;
-use anyhow::Result;
 use clap::Error;
 use clap::error::ErrorKind;
 use flate2::read::GzDecoder;
@@ -10,7 +9,13 @@ use std::io::BufReader;
 use std::path::PathBuf;
 use tar::Archive;
 
-pub fn decrypt_folder(encrypted_file: PathBuf, password: String, output: PathBuf) -> Result<()> {
+use crate::result;
+
+pub fn decrypt_folder(
+    encrypted_file: PathBuf,
+    password: String,
+    output: PathBuf,
+) -> result::Result<()> {
     if !encrypted_file.exists() {
         Error::raw(
             ErrorKind::InvalidValue,

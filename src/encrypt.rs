@@ -1,5 +1,4 @@
 use age::{Encryptor, secrecy::SecretString};
-use anyhow::Result;
 use chrono::Local;
 use clap::Error;
 use clap::error::ErrorKind;
@@ -7,8 +6,14 @@ use flate2::{Compression, write::GzEncoder};
 use std::{fs::File, io::BufWriter, path::PathBuf};
 use tar::Builder;
 
+use crate::result;
+
 // use streaming encryption
-pub fn encrypt_folder(folder_path: PathBuf, password: String, output: PathBuf) -> Result<()> {
+pub fn encrypt_folder(
+    folder_path: PathBuf,
+    password: String,
+    output: PathBuf,
+) -> result::Result<()> {
     if !folder_path.exists() {
         Error::raw(
             ErrorKind::InvalidValue,
