@@ -1,8 +1,6 @@
 use age::Decryptor;
 use age::scrypt;
 use age::secrecy::SecretString;
-use clap::Error;
-use clap::error::ErrorKind;
 use flate2::read::GzDecoder;
 use std::fs::File;
 use std::io::BufReader;
@@ -17,11 +15,7 @@ pub fn decrypt_folder(
     output: PathBuf,
 ) -> result::Result<()> {
     if !encrypted_file.exists() {
-        Error::raw(
-            ErrorKind::InvalidValue,
-            format!("Encrypted file not found: {}\n", encrypted_file.display()),
-        )
-        .exit()
+        return Err(format!("Encrypted file not found: {}\n", encrypted_file.display()).into());
     }
 
     println!("Decrypting...");

@@ -1,7 +1,5 @@
 use age::{Encryptor, secrecy::SecretString};
 use chrono::Local;
-use clap::Error;
-use clap::error::ErrorKind;
 use flate2::{Compression, write::GzEncoder};
 use std::{fs::File, io::BufWriter, path::PathBuf};
 use tar::Builder;
@@ -15,30 +13,19 @@ pub fn encrypt_folder(
     output: PathBuf,
 ) -> result::Result<()> {
     if !folder_path.exists() {
-        Error::raw(
-            ErrorKind::InvalidValue,
-            format!(
-                "input folder path does not exist: {}\n",
-                folder_path.display()
-            ),
+        return Err(format!(
+            "input folder path does not exist: {}\n",
+            folder_path.display()
         )
-        .exit()
+        .into());
     }
 
     if !output.exists() {
-        Error::raw(
-            ErrorKind::InvalidValue,
-            format!("Output folder path does not exist: {}\n", output.display()),
-        )
-        .exit()
+        return Err(format!("Output folder path does not exist: {}\n", output.display()).into());
     }
 
     if output.is_file() {
-        Error::raw(
-            ErrorKind::InvalidValue,
-            format!("Output must be a directory: {}\n", output.display()),
-        )
-        .exit()
+        return Err(format!("Output must be a directory: {}\n", output.display()).into());
     }
 
     let output_file = {
