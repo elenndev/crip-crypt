@@ -15,7 +15,7 @@ pub fn decrypt_folder(
     output: PathBuf,
 ) -> result::Result<()> {
     if !encrypted_file.exists() {
-        return Err(format!("Encrypted file not found: {}\n", encrypted_file.display()).into());
+        return Err(format!("Encrypted file not found: {}", encrypted_file.display()).into());
     }
 
     println!("Decrypting...");

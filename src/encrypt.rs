@@ -14,18 +14,18 @@ pub fn encrypt_folder(
 ) -> result::Result<()> {
     if !folder_path.exists() {
         return Err(format!(
-            "input folder path does not exist: {}\n",
+            "Input folder path does not exist: {}\n",
             folder_path.display()
         )
         .into());
     }
 
     if !output.exists() {
-        return Err(format!("Output folder path does not exist: {}\n", output.display()).into());
+        return Err(format!("Output folder path does not exist: {}", output.display()).into());
     }
 
     if output.is_file() {
-        return Err(format!("Output must be a directory: {}\n", output.display()).into());
+        return Err(format!("Output must be a directory: {}", output.display()).into());
     }
 
     let output_file = {
